@@ -28,7 +28,7 @@ export default function SuccessPage() {
 
       try {
         const res = await fetch(
-          `http://localhost:4000/api/stripe/checkout-success?session_id=${session_id}`
+          `${import.meta.env.VITE_API_URL}/api/stripe/checkout-success?session_id=${session_id}`
         );
         const data = await res.json();
 
@@ -58,12 +58,12 @@ export default function SuccessPage() {
   // ---------------- Loading State ----------------
   if (loading) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-green-50 via-white to-green-50 p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-green-50 via-white to-green-50 p-4">
         <Toaster position="top-right" />
         <div className="text-center space-y-6">
           <div className="relative w-28 h-28 md:w-36 md:h-36 mx-auto">
             <div className="absolute inset-0 bg-green-100 rounded-full animate-ping opacity-75"></div>
-            <div className="relative w-full h-full rounded-full flex items-center justify-center bg-gradient-to-br from-[#317F21] to-green-600 shadow-lg">
+            <div className="relative w-full h-full rounded-full flex items-center justify-center bg-linear-to-br from-[#317F21] to-green-600 shadow-lg">
               <Loader2 className="w-12 h-12 md:w-16 md:h-16 text-white animate-spin" />
             </div>
           </div>
@@ -90,10 +90,10 @@ export default function SuccessPage() {
   // ---------------- Error State ----------------
   if (!order) {
     return (
-      <div className="min-h-screen flex flex-col items-center justify-center bg-gradient-to-br from-red-50 via-white to-red-50 p-4">
+      <div className="min-h-screen flex flex-col items-center justify-center bg-linear-to-br from-red-50 via-white to-red-50 p-4">
         <div className="text-center space-y-6 max-w-md">
           <div className="relative w-28 h-28 md:w-36 md:h-36 mx-auto">
-            <div className="relative w-full h-full rounded-full flex items-center justify-center bg-gradient-to-br from-red-500 to-red-600 shadow-lg animate-shake">
+            <div className="relative w-full h-full rounded-full flex items-center justify-center bg-linear-to-br from-red-500 to-red-600 shadow-lg animate-shake">
               <AlertCircle className="w-12 h-12 md:w-16 md:h-16 text-white" />
             </div>
           </div>
@@ -103,7 +103,7 @@ export default function SuccessPage() {
           </p>
           <button
             onClick={() => navigate("/product")}
-            className="bg-gradient-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 mx-auto"
+            className="bg-linear-to-r from-red-500 to-red-600 hover:from-red-600 hover:to-red-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg flex items-center gap-2 mx-auto"
           >
             <ShoppingBag className="w-5 h-5" />
             Return to Shop
@@ -115,7 +115,7 @@ export default function SuccessPage() {
 
   // ---------------- Success State ----------------
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 via-white to-green-50 py-8 md:py-12 px-4">
+    <div className="min-h-screen bg-linear-to-br from-green-50 via-white to-green-50 py-8 md:py-12 px-4">
       <Toaster position="top-right" />
       <div className="max-w-4xl mx-auto space-y-6 md:space-y-8">
         {/* Header */}
@@ -123,7 +123,7 @@ export default function SuccessPage() {
           <div className="relative inline-block">
             <div className="w-20 h-20 md:w-24 md:h-24 mx-auto mt-20">
               <div className="absolute inset-0 bg-green-100 rounded-full animate-ping opacity-75"></div>
-              <div className="relative bg-gradient-to-br from-[#317F21] to-green-600 rounded-full w-full h-full flex items-center justify-center shadow-lg animate-scaleIn">
+              <div className="relative bg-linear-to-br from-[#317F21] to-green-600 rounded-full w-full h-full flex items-center justify-center shadow-lg animate-scaleIn">
                 <CheckCircle className="w-10 h-10 md:w-12 md:h-12 text-white" />
               </div>
             </div>
@@ -138,7 +138,7 @@ export default function SuccessPage() {
 
         {/* Order Details */}
         <div className="bg-white rounded-2xl shadow-xl border border-gray-200 overflow-hidden animate-fadeInUp">
-          <div className="bg-gradient-to-r from-[#317F21] to-green-600 px-6 md:px-8 py-4 md:py-6">
+          <div className="bg-linear-to-r from-[#317F21] to-green-600 px-6 md:px-8 py-4 md:py-6">
             <h2 className="text-xl md:text-2xl font-bold text-white flex items-center gap-2">
               <Package className="w-5 h-5 md:w-6 md:h-6" />
               Order Summary
@@ -152,25 +152,25 @@ export default function SuccessPage() {
                 <h3 className="font-semibold text-gray-800 text-sm md:text-base mb-3">Customer Information</h3>
                 {order.email && (
                   <div className="flex items-center gap-3 text-sm md:text-base">
-                    <Mail className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0" />
+                    <Mail className="w-4 h-4 md:w-5 md:h-5 text-green-600 shrink-0" />
                     <span className="text-gray-700 break-all">{order.email}</span>
                   </div>
                 )}
                 {order.phone && (
                   <div className="flex items-center gap-3 text-sm md:text-base">
-                    <Phone className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0" />
+                    <Phone className="w-4 h-4 md:w-5 md:h-5 text-green-600 shrink-0" />
                     <span className="text-gray-700">{order.phone}</span>
                   </div>
                 )}
                 {order.address && (
                   <div className="flex items-start gap-3 text-sm md:text-base">
-                    <MapPin className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0 mt-1" />
+                    <MapPin className="w-4 h-4 md:w-5 md:h-5 text-green-600 shrink-0 mt-1" />
                     <span className="text-gray-700">{order.address}</span>
                   </div>
                 )}
                 {order.createdAt && (
                   <div className="flex items-center gap-3 text-sm md:text-base">
-                    <Calendar className="w-4 h-4 md:w-5 md:h-5 text-green-600 flex-shrink-0" />
+                    <Calendar className="w-4 h-4 md:w-5 md:h-5 text-green-600 shrink-0" />
                     <span className="text-gray-700">
                       {new Date(order.createdAt).toLocaleString("en-GB", {
                         day: "2-digit",
@@ -210,7 +210,7 @@ export default function SuccessPage() {
 
             {/* Total */}
             <div className="border-t-2 border-gray-200" />
-            <div className="flex justify-between items-center p-4 md:p-6 bg-gradient-to-r from-green-50 to-green-100 rounded-xl">
+            <div className="flex justify-between items-center p-4 md:p-6 bg-linear-to-r from-green-50 to-green-100 rounded-xl">
               <div className="flex items-center gap-2">
                 <CreditCard className="w-5 h-5 md:w-6 md:h-6 text-green-600" />
                 <span className="font-bold text-gray-800 text-lg md:text-xl">Total Paid:</span>
@@ -233,7 +233,7 @@ export default function SuccessPage() {
         <div className="flex flex-col sm:flex-row gap-4 justify-center items-center animate-fadeInUp">
           <button
             onClick={() => navigate("/product")}
-            className="w-full sm:w-auto bg-gradient-to-r from-[#317F21] to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
+            className="w-full sm:w-auto bg-linear-to-r from-[#317F21] to-green-600 hover:from-green-600 hover:to-green-700 text-white px-6 md:px-8 py-3 md:py-4 rounded-xl font-semibold transition-all transform hover:scale-105 shadow-lg flex items-center justify-center gap-2"
           >
             <ShoppingBag className="w-5 h-5" />
             Continue Shopping
